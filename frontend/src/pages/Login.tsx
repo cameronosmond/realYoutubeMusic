@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import FadeContent from "../components/FadeContent";
 
-
 function Login() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const navigate = useNavigate();
@@ -24,23 +23,14 @@ function Login() {
   });
 
   return (
-    <div>
-      <FadeContent
-        blur={true}
-        duration={1000}
-        easing="ease-out"
-        initialOpacity={0}>
-        <h1>Welcome to Youtube Music Playlist Manager</h1>
-        <div
-          id="google-login-button"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        />
-      </FadeContent>
+    <FadeContent
+      blur={true}
+      duration={1000}
+      easing="ease-out"
+      initialOpacity={0}>
+      <h1>Welcome to Youtube Music Playlist Manager</h1>
       <button onClick={() => client.requestCode()}>Login with Google</button>
-    </div>
+    </FadeContent>
   );
 }
 
