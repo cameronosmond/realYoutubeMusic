@@ -1,12 +1,17 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import FadeContent from "../components/FadeContent";
 
 function Login() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const navigate = useNavigate();
 
   function handleCredentialResponse(response: { credential: string }) {
     console.log("Google ID token:", response.credential);
     // Send to backend here
+
+
+    navigate("/dashboard");
   }
 
   useEffect(() => {
