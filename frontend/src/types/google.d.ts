@@ -6,21 +6,15 @@ declare global {
   interface Window {
     google: {
       accounts: {
-        id: {
-          initialize: (options: {
+        oauth2: {
+          initCodeClient: (options: {
             client_id: string;
-            callback: (response: { credential: string }) => void;
-          }) => void;
-          renderButton: (
-            parent: HTMLElement,
-            opts: {
-              theme?: string;
-              size?: string;
-              shape?: string;
-              width?: number;
-            }
-          ) => void;
-          prompt: () => void;
+            scope: string;
+            ux_mode?: 'popup' | 'redirect';
+            callback: (response: { code: string }) => void;
+          }) => {
+            requestCode: () => void;
+          };
         };
       };
     };
