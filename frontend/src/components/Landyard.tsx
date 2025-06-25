@@ -25,8 +25,6 @@ import * as THREE from "three";
 import cardGLB from "../assets/card.glb";
 import lanyard from "../assets/lanyard.png";
 
-import "./Lanyard.css";
-
 extend({ MeshLineGeometry, MeshLineMaterial });
 
 interface LanyardProps {

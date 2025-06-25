@@ -30,7 +30,6 @@ function Login() {
       easing="ease-out"
       initialOpacity={0}>
       <h1>Welcome to Youtube Music Playlist Manager</h1>
-      <button onClick={() => client.requestCode()}>Login with Google</button>
       <Lanyard
         position={[0, 0, 20]}
         gravity={[0, -40, 0]}
