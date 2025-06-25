@@ -6,16 +6,15 @@ function Login() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const navigate = useNavigate();
 
-  function handleCredentialResponse(response: { credential: string }) {
-    console.log("Google ID token:", response.credential);
-    // Send to backend here
-
-
-    navigate("/dashboard");
-  }
-
   useEffect(() => {
-    console.log(clientId);
+    function handleCredentialResponse(response: { credential: string }) {
+      console.log("Google ID token:", response.credential);
+      // Send to backend here
+
+      navigate("/dashboard");
+    }
+
+
     if (window.google && window.google.accounts) {
       window.google.accounts.id.initialize({
         client_id: clientId,
@@ -32,7 +31,7 @@ function Login() {
         }
       );
     }
-  }, []);
+  }, [clientId, navigate]);
   return (
     <FadeContent
       blur={true}
