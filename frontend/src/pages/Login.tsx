@@ -4,6 +4,7 @@ import Lanyard from "../components/Landyard";
 
 function Login() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const client = window.google.accounts.oauth2.initCodeClient({
@@ -12,14 +13,14 @@ function Login() {
     ux_mode: "popup",
     callback: (res: { code: string }) => {
       // Sending code to backend Lambda
-      /*fetch("/api/exchange-code", {
+      fetch(`${apiUrl}/googleSignIn`, {
         method: "POST",
         body: JSON.stringify({ code: res.code }),
         headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
         },
-      }).then(() => navigate("/dashboard"));*/
+      }).then(() => navigate("/dashboard"));
     },
   });
 
