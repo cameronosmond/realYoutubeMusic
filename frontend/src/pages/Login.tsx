@@ -9,7 +9,7 @@ function Login() {
 
   const client = window.google.accounts.oauth2.initCodeClient({
     client_id: clientId,
-    scope: "https://www.googleapis.com/auth/youtube.readonly",
+    scope: "openid https://www.googleapis.com/auth/youtube.readonly", // openid to get unique id_token for storing per user in db
     ux_mode: "popup",
     callback: (res: { code: string }) => {
       // Sending code to backend Lambda
@@ -20,7 +20,15 @@ function Login() {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
         },
-      }).then(() => navigate("/dashboard"));
+      }).then(async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          console.log("Success:", data.message);
+          navigate("/dashboard");
+        } else {
+          console.error("Error:", data.error || data);
+        }
+      });
     },
   });
 
