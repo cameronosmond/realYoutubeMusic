@@ -13,7 +13,7 @@ function Login() {
     ux_mode: "popup",
     callback: (res: { code: string }) => {
       // Sending code to backend Lambda
-      fetch(`${apiUrl}/googleSignIn`, {
+      fetch(`${apiUrl}/googleSignIn`, { // api gateway endpoint
         method: "POST",
         body: JSON.stringify({ code: res.code }),
         headers: {
