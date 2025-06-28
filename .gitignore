@@ -7,7 +7,8 @@ node_modules
 /frontend/.env
 
 # Backend
-/backend/.env
+/lambdas/.env
+/lambdas/node_modules
 
 # AWS
 *.zip
