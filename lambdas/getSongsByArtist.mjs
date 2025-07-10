@@ -16,6 +16,13 @@ export const handler = async (event) => {
           const body = JSON.parse(event.body);
           const { artistName, userId } = body;
 
+          if (event.headers['x-requested-with'] !== 'XMLHttpRequest') {
+            return {
+              statusCode: 400,
+              body: JSON.stringify('Invalid request'),
+            }
+          }
+
     } catch (error) {
         console.error("Error: ", error);
         return {
