@@ -18,23 +18,27 @@ function Dashboard({ userId }: Props) {
     const query = formData.get("artistName") as string;
     const artistName = query.toLowerCase();
 
-    // calling getSongsByArtist lambda function
-    const res = await fetch(`${apiUrl}/getSongsByArtist`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        artistName: artistName,
-        userId: userId,
-      }),
-    });
+    try {
+      // calling getSongsByArtist lambda function
+      const res = await fetch(`${apiUrl}/getSongsByArtist`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          artistName: artistName,
+          userId: userId,
+        }),
+      });
 
-    const data = await res.json();
-    setLoading(false);
+      const data = await res.json();
+      setLoading(false);
 
-    if (res.ok) {
-      console.log("Songs: ", data.results);
-    } else {
-      console.error("Error:", data.error || data);
+      if (res.ok) {
+        console.log("Songs: ", data.results);
+      } else {
+        console.error("Error:", data.error || data);
+      }
+    } catch (error) {
+      console.trace(error);
     }
   };
 
