@@ -1,4 +1,3 @@
-// /src/pages/Privacy.tsx
 export default function Privacy() {
   return (
     <div className="p-4 max-w-2xl mx-auto">
