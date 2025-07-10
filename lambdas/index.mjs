@@ -1,16 +1,16 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+
+const client = new DynamoDBClient({ region: "us-east-1" });
+const ddb = DynamoDBDocumentClient.from(client);
 
 export const handler = async (event) => {
   try {
-    console.log("lambda handler invoked");
-    
     const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
     const clientId = process.env.GOOGLE_CLIENT_ID;
 
     if (!event.body) {
-      console.log("Missing event.body");
       return {
         statusCode: 400,
         body: JSON.stringify({ error: "Missing body" }),
@@ -18,11 +18,9 @@ export const handler = async (event) => {
     }
     
     const body = JSON.parse(event.body);
-    console.log("event.body: ", body);
     const code = body.code;
-    console.log("event.body.code: ", code);
 
-    if (event.headers['X-Requested-With'] !== 'XmlHttpRequest') {
+    if (event.headers['x-requested-with'] !== 'XMLHttpRequest') {
       return {
         statusCode: 400,
         body: JSON.stringify('Invalid request'),
@@ -49,43 +47,34 @@ export const handler = async (event) => {
       };
     }
 
-    console.log("successfully res.ok after fetching from oauth2");
-
     const tokens = await res.json();
 
-    const client = new DynamoDBClient({});
-    const ddb = DynamoDBDocumentClient.from(client);
-
-    const decoded = jwt_decode<{ sub: string }>(tokens.id_token); // decoding id_token to get sub key
+    const decoded = jwtDecode(tokens.id_token); // decoding id_token to get sub key
     const userId = decoded.sub; // unique id per user to store for accessing their refresh token in db
 
-    console.log("userId from jwt_decode: ", userId);
-
-    // query DynamoDB to check if the user already exists
-    const getResult = await ddb.send(
-      new GetCommand({
-        TableName: "ytMusicAppUsers",
-        Key: { user_id: userId },
-      })
-    );
-
-    console.log("getResult from checking DynamoDB: ", getResult);
-
-    // if user does not exist (first time logging in) and no refresh token provided
-    if (!getResult.Item && !tokens.refresh_token) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: "No refresh token received for new user" }),
-      };
-    }
-
-    // if user exists and no refresh token provided, use the existing refresh token
-    if (getResult.Item && !tokens.refresh_token) {
-      tokens.refresh_token = getResult.Item.refresh_token;
-    }
-
-    // insert user into db/update refresh token for existing user
     try {
+      // query DynamoDB to check if the user already exists
+      const getResult = await ddb.send(
+        new GetCommand({
+          TableName: "ytMusicAppUsers",
+          Key: { user_id: userId },
+        })
+      );
+
+      // if user does not exist (first time logging in) and no refresh token provided
+      if (!getResult.Item && !tokens.refresh_token) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ error: "No refresh token received for new user" }),
+        };
+      }
+
+      // if user exists and no refresh token provided, use the existing refresh token
+      if (getResult.Item && !tokens.refresh_token) {
+        tokens.refresh_token = getResult.Item.refresh_token;
+      }
+
+      // insert user into db/update refresh token for existing user
       await ddb.send(
         new PutCommand({
           TableName: "ytMusicAppUsers",
@@ -95,8 +84,6 @@ export const handler = async (event) => {
           },
         })
       );
-
-      console.log("successfully saved user");
       
       return {
         statusCode: 200,
@@ -110,10 +97,10 @@ export const handler = async (event) => {
       };
     }
   } catch (error) {
-    console.error("Error in handler:", error);
+    console.error("Full error JSON:", JSON.stringify(error, null, 2));
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Internal server error" }),
+      body: JSON.stringify({ error: error.message || "Internal server error" }),
     };
   }
   
