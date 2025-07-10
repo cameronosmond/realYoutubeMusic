@@ -22,7 +22,10 @@ function Dashboard({ userId }: Props) {
       // calling getSongsByArtist lambda function
       const res = await fetch(`${apiUrl}/getSongsByArtist`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
         body: JSON.stringify({
           artistName: artistName,
           userId: userId,
