@@ -12,7 +12,7 @@ function Login() {
 
   const client = window.google.accounts.oauth2.initCodeClient({
     client_id: clientId,
-    scope: "openid https://www.googleapis.com/auth/youtube.readonly", // openid to get unique id_token for storing per user in db
+    scope: "openid https://www.googleapis.com/auth/youtube.force-ssl", // openid to get unique id_token for storing per user in db
     ux_mode: "popup",
     callback: (res: { code: string }) => {
       setLoading(true);
