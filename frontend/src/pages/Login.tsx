@@ -32,8 +32,9 @@ function Login() {
           setLoading(false);
 
           if (res.ok) {
-            console.log("Success:", data.message);
-            navigate("/dashboard");
+            const userId = data.userId;
+            console.log("userId: ", userId);
+            navigate("/dashboard", { state: { userId } });
           } else {
             console.error("Error:", data.error || data);
           }

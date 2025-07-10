@@ -1,5 +1,9 @@
-function Dashboard() {
-    return <p>Dashboard</p>
+interface Props {
+  userId: string;
+}
+
+function Dashboard({ userId }: Props) {
+  return <p></p>;
 }
 
 export default Dashboard;
