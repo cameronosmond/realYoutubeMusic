@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import FadeContent from "../components/FadeContent";
 import Lanyard from "../components/Landyard";
+import { FourSquare } from "react-loading-indicators";
 
 function Login() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -51,7 +52,12 @@ function Login() {
       easing="ease-out"
       initialOpacity={0}>
       {loading ? (
-        <div>Loading...</div>
+        <FourSquare
+          color="rgba(255, 255, 255, 0.87)"
+          size="large"
+          text="Loading"
+          textColor="rgba(255, 255, 255, 0.87)"
+        />
       ) : (
         <>
           <h1>Welcome to Youtube Music Playlist Manager</h1>
