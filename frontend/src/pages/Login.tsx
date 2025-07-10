@@ -33,8 +33,7 @@ function Login() {
 
           if (res.ok) {
             const userId = data.userId;
-            console.log("userId: ", userId);
-            navigate("/dashboard", { state: { userId } });
+            navigate(`/dashboard/${userId}`);
           } else {
             console.error("Error:", data.error || data);
           }

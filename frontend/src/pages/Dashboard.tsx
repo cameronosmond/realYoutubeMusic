@@ -1,22 +1,25 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FadeContent from "../components/FadeContent";
 import { FourSquare } from "react-loading-indicators";
 
-interface Props {
-  userId: string;
+interface Song {
+  title: string;
+  playlistTitle: string;
+  channelName: string;
 }
 
-function Dashboard({ userId }: Props) {
+function Dashboard() {
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  const { userId } = useParams<{ userId: string }>();
 
   const getSongs = async (formData: FormData) => {
     setLoading(true);
 
-    const query = formData.get("artistName") as string;
-    const artistName = query.toLowerCase();
+    const artistName = formData.get("artistName") as string;
+    const artistNameLower = artistName.toLowerCase();
 
     try {
       // calling getSongsByArtist lambda function
@@ -27,7 +30,7 @@ function Dashboard({ userId }: Props) {
           "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify({
-          artistName: artistName,
+          artistName: artistNameLower,
           userId: userId,
         }),
       });
@@ -36,7 +39,10 @@ function Dashboard({ userId }: Props) {
       setLoading(false);
 
       if (res.ok) {
-        console.log("Songs: ", data.results);
+        // sort songs in alphabetical order by their titles
+        const songs: Song[] = data.result;
+        songs.sort((a, b) => a.title.localeCompare(b.title));
+        navigate(`/songs/${artistName}`, { state: { songs } });
       } else {
         console.error("Error:", data.error || data);
       }
