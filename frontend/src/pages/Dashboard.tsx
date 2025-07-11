@@ -47,6 +47,7 @@ function Dashboard() {
         console.error("Error:", data.error || data);
       }
     } catch (error) {
+      setLoading(false);
       console.trace(error);
     }
   };
