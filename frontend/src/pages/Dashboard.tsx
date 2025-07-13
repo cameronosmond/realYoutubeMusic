@@ -15,8 +15,6 @@ function Dashboard() {
   const { userId } = useParams<{ userId: string }>();
 
   const getSongs = async (formData: FormData) => {
-    setLoading(true);
-
     const artistName = formData.get("artistName") as string;
     const artistNameLower = artistName.toLowerCase();
 
@@ -65,7 +63,11 @@ function Dashboard() {
           textColor="rgba(255, 255, 255, 0.87)"
         />
       ) : (
-        <form action={getSongs}>
+        <form
+          action={(formData: FormData) => {
+            setLoading(true);
+            getSongs(formData);
+          }}>
           <label>
             Enter artist name: <input name="artistName" />
             <button type="submit">Search</button>
