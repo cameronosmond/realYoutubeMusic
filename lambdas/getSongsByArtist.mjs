@@ -68,13 +68,13 @@ export const handler = async (event) => {
 
             // loop through songs in this playlist and only add them to result if title or channel name contains the artist name
             for (const song of items) {
-                const title = song.snippet.title.toLowerCase();
+                const title = song.snippet.title;
+                const titleLower = title.toLowerCase();
                 const channelName = song.snippet.videoOwnerChannelTitle.toLowerCase();
 
-                if (title.includes(artistName) || channelName.includes(artistName)) {
+                if (titleLower.includes(artistName) || channelName.includes(artistName)) {
                     result.push({
                         title: title, 
-                        channelName: channelName,
                         playlistTitle: playlist.snippet.title,
                     });
                 }

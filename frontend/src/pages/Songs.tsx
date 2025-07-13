@@ -3,7 +3,6 @@ import { useLocation, useParams } from "react-router-dom";
 interface Song {
   title: string;
   playlistTitle: string;
-  channelName: string;
 }
 
 function Songs() {
