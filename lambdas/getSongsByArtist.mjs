@@ -56,31 +56,49 @@ export const handler = async (event) => {
         });
         const playlists = (await playlistRes.json()).items;
 
-        let result = [];
-        // loop through playlists, for each playlist get all songs
-        for (const playlist of playlists) {
-            const playlistId = playlist.id;
+        // map through playlists array, replacing each array with array of valid songs from that playlist
+        const allResults = await Promise.all(
+            playlists.map(async (playlist) => {
+                let mapResult = [];
+                const playlistId = playlist.id;
 
-            const itemsRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50`, {
-                headers: { Authorization: `Bearer ${access_token}` },
-            });
-            const items = (await itemsRes.json()).items;
+            
+                // pagination to get all songs in a playlist via pageToken and nextPageToken since maxResults can only be 0-50
+                let nextPageToken = undefined;
+                do {
+                    const itemsRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?` +
+                    new URLSearchParams({
+                        part: "snippet",
+                        playlistId: playlistId,
+                        maxResults: "50",
+                        pageToken: nextPageToken || "",
+                        access_token: access_token,
+                    })
+                    );
+                
+                    const data = await itemsRes.json();
+                    const dataItems = data.items;
+                    // only adding song to acc if song title or channel name contains the artist name, pushing onto result array 
+                    mapResult.push(...dataItems.reduce((acc, item) => {
+                        const titleLower = item.snippet.title?.toLowerCase() || "";
+                        const channelNameLower = item.snippet.videoOwnerChannelTitle?.toLowerCase() || "";
 
-            // loop through songs in this playlist and only add them to result if title or channel name contains the artist name
-            for (const song of items) {
-                const title = song.snippet.title;
-                const titleLower = title.toLowerCase();
-                const channelName = song.snippet.videoOwnerChannelTitle.toLowerCase();
+                        if (titleLower.includes(artistName) || channelNameLower.includes(artistName)) {
+                            acc.push({
+                                title: item.snippet.title || "No Title", 
+                                playlistTitle: playlist.snippet.title,
+                            });
+                        } 
+                        return acc;
+                    }, []));
+                
+                    nextPageToken = data.nextPageToken;
+                } while (nextPageToken);
 
-                if (titleLower.includes(artistName) || channelName.includes(artistName)) {
-                    result.push({
-                        title: title, 
-                        playlistTitle: playlist.snippet.title,
-                    });
-                }
-            }
-        }
+                return mapResult;
+        }));
 
+        const result = allResults.flat(); // flatten the array of arrays
         return {
             statusCode: 200,
             body: JSON.stringify({ result })
