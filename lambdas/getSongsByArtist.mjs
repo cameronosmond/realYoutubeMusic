@@ -61,7 +61,7 @@ export const handler = async (event) => {
         for (const playlist of playlists) {
             const playlistId = playlist.id;
 
-            const itemsRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}`, {
+            const itemsRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50`, {
                 headers: { Authorization: `Bearer ${access_token}` },
             });
             const items = (await itemsRes.json()).items;
