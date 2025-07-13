@@ -13,11 +13,12 @@ function Songs() {
 
   return (
     <div>
-      <h1>Songs by {artist}</h1>
+      <h1>Songs by {artist} in your playlists</h1>
       <ul>
         {songs.map((song, index) => (
           <li key={index}>
-            {song.title} by {song.channelName} in playlist: {song.playlistTitle}
+            <strong>{song.title}</strong> - Playlist:{" "}
+            <strong>{song.playlistTitle}</strong>
           </li>
         ))}
       </ul>
