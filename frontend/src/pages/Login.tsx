@@ -17,9 +17,8 @@ function Login() {
     callback: (res: { code: string }) => {
       setLoading(true);
 
-      // Sending code to backend Lambda
+      // calling googleSignIn lambda function via api gateway endpoint
       fetch(`${apiUrl}/googleSignIn`, {
-        // api gateway endpoint
         method: "POST",
         body: JSON.stringify({ code: res.code }),
         headers: {

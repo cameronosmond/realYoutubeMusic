@@ -19,7 +19,7 @@ function Dashboard() {
     const artistNameLower = artistName.toLowerCase();
 
     try {
-      // calling getSongsByArtist lambda function
+      // calling getSongsByArtist lambda function via api gateway endpoint
       const res = await fetch(`${apiUrl}/getSongsByArtist`, {
         method: "POST",
         headers: {
