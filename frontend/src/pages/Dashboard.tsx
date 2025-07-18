@@ -12,7 +12,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
-  const { userId } = useParams<{ userId: string }>();
+  const { encoded } = useParams<{ encoded: string }>();
 
   const getSongs = async (formData: FormData) => {
     const artistName = formData.get("artistName") as string;
@@ -28,7 +28,7 @@ function Dashboard() {
         },
         body: JSON.stringify({
           artistName: artistNameLower,
-          userId: userId,
+          encoded,
         }),
       });
 
