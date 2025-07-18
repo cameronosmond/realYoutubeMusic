@@ -48,8 +48,8 @@ export const handler = async (event) => {
     }
 
     const tokens = await res.json();
-
-    const decoded = jwtDecode(tokens.id_token); // decoding id_token to get sub key
+    const encoded = tokens.id_token;
+    const decoded = jwtDecode(encoded); // decoding id_token to get sub key
     const userId = decoded.sub; // unique id per user to store for accessing their refresh token in db
 
     try {
@@ -87,7 +87,7 @@ export const handler = async (event) => {
       
       return {
         statusCode: 200,
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ encoded }),
       };
     } catch (err) {
       console.error("DynamoDB error:", err);
