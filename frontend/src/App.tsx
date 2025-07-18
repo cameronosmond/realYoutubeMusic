@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/privacy" element={<Privacy />} />
-        <Route path="/dashboard/:userId" element={<Dashboard />} />
+        <Route path="/dashboard/:encoded" element={<Dashboard />} />
         <Route path="/songs/:artist" element={<Songs />} />
       </Routes>
     </Router>
