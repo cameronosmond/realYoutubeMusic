@@ -16,7 +16,7 @@ function Songs() {
       <ul>
         {songs.map((song, index) => (
           <li key={index}>
-            <strong>{song.title}</strong> - Playlist:{" "}
+            <strong>{song.title}</strong> - Playlist(s):{" "}
             <strong>{song.playlistTitle}</strong>
           </li>
         ))}
