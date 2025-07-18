@@ -1,5 +1,6 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { jwtDecode } from 'jwt-decode';
 
 const client = new DynamoDBClient({ region: "us-east-1" });
 const ddb = DynamoDBDocumentClient.from(client);
@@ -17,7 +18,10 @@ export const handler = async (event) => {
         }
           
         const body = JSON.parse(event.body);
-        const { artistName, userId } = body;
+        const { artistName, encoded } = body;
+
+        const decoded = jwtDecode(encoded); // decoding id_token to get sub key
+        const userId = decoded.sub; // unique id per user to store for accessing their refresh token in db
 
         if (event.headers['x-requested-with'] !== 'XMLHttpRequest') {
             return {
