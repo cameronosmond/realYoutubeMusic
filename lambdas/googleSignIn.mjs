@@ -1,6 +1,6 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { jwtDecode } from 'jwt-decode';
+import { OAuth2Client } from 'google-auth-library';
 
 const client = new DynamoDBClient({ region: "us-east-1" });
 const ddb = DynamoDBDocumentClient.from(client);
@@ -49,8 +49,16 @@ export const handler = async (event) => {
 
     const tokens = await res.json();
     const encoded = tokens.id_token;
-    const decoded = jwtDecode(encoded); // decoding id_token to get sub key
-    const userId = decoded.sub; // unique id per user to store for accessing their refresh token in db
+
+    // verifying encoded token is from google and decoding
+    const client = new OAuth2Client();
+    const ticket = await client.verifyIdToken({
+        idToken: encoded, 
+        audience: clientId,
+    });
+    const payload = ticket.getPayload();
+    if (!payload?.sub) throw new Error("Invalid token");
+    const userId = payload.sub; // unique id per user to store for accessing their refresh token in db
 
     try {
       // query DynamoDB to check if the user already exists
