@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "google-auth-library": "^10.1.0",
     "react-loading-indicators": "^1.0.1"
   }
 }
