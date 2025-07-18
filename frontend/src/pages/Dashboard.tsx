@@ -37,27 +37,7 @@ function Dashboard() {
 
       if (res.ok) {
         const songs: Song[] = data.result;
-        const songsSeen: Map<string, string> = new Map();
-        // create map with key value pairings of (song title, playlists song is in)
-        for (const song of songs) {
-          if (!songsSeen.has(song.title)) {
-            songsSeen.set(song.title, song.playlistTitle);
-          } else {
-            const playlists = songsSeen.get(song.title);
-            songsSeen.set(song.title, `${playlists}, ${song.playlistTitle}`);
-          }
-        }
-
-        const songsFiltered: Song[] = [];
-        // iterate through map and add Song objects to songsFiltered
-        for (const [key, value] of songsSeen) {
-          songsFiltered.push({ title: key, playlistTitle: value });
-        }
-
-        // sort songs in alphabetical order by their titles
-        songsFiltered.sort((a, b) => a.title.localeCompare(b.title));
-
-        navigate(`/songs/${artistName}`, { state: { songsFiltered } });
+        navigate(`/songs/${artistName}`, { state: { songs } });
       } else {
         console.error("Error:", data.error || data);
       }
