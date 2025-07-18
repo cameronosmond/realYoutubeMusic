@@ -32,8 +32,8 @@ function Login() {
           setLoading(false);
 
           if (res.ok) {
-            const userId = data.userId;
-            navigate(`/dashboard/${userId}`);
+            const { encoded } = data;
+            navigate(`/dashboard/${encoded}`);
           } else {
             console.error("Error:", data.error || data);
           }
