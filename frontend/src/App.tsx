@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/dashboard/:encoded" element={<Dashboard />} />
-        <Route path="/songs/:artist" element={<Songs />} />
+        <Route path="/songs/:encoded/:artist" element={<Songs />} />
       </Routes>
     </Router>
   );

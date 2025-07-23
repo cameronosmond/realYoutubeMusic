@@ -37,7 +37,7 @@ function Dashboard() {
 
       if (res.ok) {
         const songs: Song[] = data.result;
-        navigate(`/songs/${artistName}`, { state: { songs } });
+        navigate(`/songs/${encoded}/${artistName}`, { state: { songs } });
       } else {
         console.error("Error:", data.error || data);
       }

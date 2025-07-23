@@ -35,6 +35,13 @@ h1 {
   line-height: 1.1;
 }
 
+#dashboardText {
+  position: fixed;
+  left: 1em;
+  top: 1em;
+  cursor: pointer;
+}
+
 .lanyard-wrapper {
   position: relative;
   z-index: 0;
