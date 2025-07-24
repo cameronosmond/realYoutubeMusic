@@ -33,7 +33,6 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  margin-bottom: 0;
 }
 
 #dashboardText {
@@ -50,5 +49,28 @@ h1 {
   color: rgba(255, 255, 255, 0.87);
   border-radius: 2.5em;
   cursor: pointer;
-  margin: 1em;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#textInput {
+  padding: .75em;
+  border-radius: 2em;
+  font-size: 1rem;
+  width: 50em;
+  margin-bottom: 1em;
+}
+
+#searchButton {
+  font-size: .88rem;
+  padding: .75em;
+  background-color: blue;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 2em;
+  cursor: pointer;
+  width: 10em;
 }

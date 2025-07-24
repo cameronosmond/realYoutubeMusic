@@ -52,7 +52,7 @@ function Songs() {
   return (
     <>
       <Link to={`/dashboard/${encoded}`}>
-        <h2 id="dashboardText">Back to Dashboard</h2>
+        <h2 id="dashboardText">⬅️ Back to Dashboard</h2>
       </Link>
       <FadeContent
         blur={true}
@@ -72,7 +72,8 @@ function Songs() {
         ) : (
           <>
             <h2>
-              Total Song Count: {totalSongs}<br />
+              Total Song Count: {totalSongs}
+              <br />
               Unique Song Count: {uniqueSongs}
             </h2>
             <ul>

@@ -61,16 +61,24 @@ function Dashboard() {
           textColor="rgba(255, 255, 255, 0.87)"
         />
       ) : (
-        <form
-          action={(formData: FormData) => {
-            setLoading(true);
-            getSongs(formData);
-          }}>
-          <label>
-            Enter artist name: <input name="artistName" />
-            <button type="submit">Search</button>
-          </label>
-        </form>
+        <>
+          <h1>Dashboard</h1>
+          <form
+            id="form"
+            action={(formData: FormData) => {
+              setLoading(true);
+              getSongs(formData);
+            }}>
+            <input
+              id="textInput"
+              name="artistName"
+              placeholder="Enter artist name..."
+            />
+            <button id="searchButton" type="submit">
+              Search
+            </button>
+          </form>
+        </>
       )}
     </FadeContent>
   );
