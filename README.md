@@ -55,6 +55,7 @@ the songs and which playlists they are in.
    - Create a new project
    - Create OAuth2.0 Client ID, store this Client ID and Client secret now as 
       you won't be able to access the secret later
+   - Follow directions https://support.google.com/cloud/answer/13461325?sjid=8080830732266021786-NA for submitting app for verification
 
 7. Frontend Environment Variables
    - `cd frontend && touch .env`
