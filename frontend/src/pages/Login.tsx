@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import FadeContent from "../components/FadeContent";
-import Lanyard from "../components/Landyard";
 import { FourSquare } from "react-loading-indicators";
 
 function Login() {
@@ -60,11 +59,9 @@ function Login() {
       ) : (
         <>
           <h1>Welcome to Youtube Music Playlist Manager</h1>
-          <Lanyard
-            position={[0, 0, 20]}
-            gravity={[0, -40, 0]}
-            onClick={() => client.requestCode()}
-          />
+          <button id="loginButton" type="button" onClick={() => client.requestCode()}>
+            Login with Google
+          </button>
         </>
       )}
     </FadeContent>
