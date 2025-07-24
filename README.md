@@ -30,12 +30,12 @@ the songs and which playlists they are in.
    - `cd lambdas && npm install`
 
 3. Configure lambda functions
-   `cd lambdas`
-   `zip -r getSongsByArtist.zip getSongsByArtist.mjs node_modules package.json`
-   `zip -r googleSignIn.zip googleSignIn.mjs node_modules package.json`
+   - `cd lambdas`
+   - `zip -r getSongsByArtist.zip getSongsByArtist.mjs node_modules package.json`
+   - `zip -r googleSignIn.zip googleSignIn.mjs node_modules package.json`
    - Go to AWS console and make two separate lambda functions:
       googleSignIn and getSongsByArtist
-   - Upload the zip files to their respective lambda functions
+   - Upload the zip files, getSongsByArtist.zip and googleSignIn.zip to their respective lambda functions
    - Ensure handler in AWS matches the file name for that function,
       i.e. getSongsByArtist.handler, googleSignIn.handler
    - Under Configuration->General configuration:
