@@ -25,9 +25,9 @@ the songs and which playlists they are in.
    `git clone https://github.com/yourusername/yourrepo.git`
 
 2. Install dependencies  
-   `npm install`
-   `cd frontend && npm install`
-   `cd lambdas && npm install`
+   - `npm install`
+   - `cd frontend && npm install`
+   - `cd lambdas && npm install`
 
 3. Configure lambda functions
    `cd lambdas`
@@ -39,8 +39,8 @@ the songs and which playlists they are in.
    - Ensure handler in AWS matches the file name for that function,
       i.e. getSongsByArtist.handler, googleSignIn.handler
    - Under Configuration->General configuration:
-      googleSignIn - make Timeout 10sec
-      getSongsByArtist - make Timeout 1min, make Memory 256MB
+      googleSignIn - make Timeout 10sec,
+      getSongsByArtist - make Timeout 1min and Memory 256MB
    - Under Configuration->Environment variables:
       for both functions, add environment variables GOOGLE_CLIENT_ID & GOOGLE_CLIENT_SECRET
 
@@ -57,7 +57,7 @@ the songs and which playlists they are in.
       you won't be able to access the secret later
 
 7. Frontend Environment Variables
-   `cd frontend && touch .env`
+   - `cd frontend && touch .env`
    - Add variables:
       VITE_API_URL: API Gateway Invoke URL
       VITE_GOOGLE_CLIENT_ID: Google OAuth Client ID  
@@ -69,27 +69,27 @@ the songs and which playlists they are in.
 
 ### Running Locally
 
-- Start frontend dev server  
-  `npm run dev --prefix frontend`
+   - Start frontend dev server  
+   `npm run dev --prefix frontend`
 
 ## Deployment
 
-- Build frontend and deploy to S3 (`npm run build` + s3-deploy.sh)  
-- Deploy Lambda functions using AWS CLI or scripts  
-- Configure API Gateway routes
+   - Build frontend and deploy to S3 (`npm run build` + s3-deploy.sh)  
+   - Deploy Lambda functions using AWS CLI or scripts  
+   - Configure API Gateway routes
 
 ## Folder Structure
 
-- `/frontend` — React + Vite code  
-- `/lambdas` — Lambda functions  
-- `/infra` — deployment scripts and configs
+   - `/frontend` — React + Vite code  
+   - `/lambdas` — Lambda functions  
+   - `/infra` — deployment scripts and configs
 
 ## Environment Variables
 
-VITE_API_URL          | URL of your deployed API Gateway  
-VITE_GOOGLE_CLIENT_ID | Google OAuth Client ID
-GOOGLE_CLIENT_ID      | Google OAuth Client ID            
-GOOGLE_CLIENT_SECRET  | Google OAuth Client Secret      
+   - VITE_API_URL          | URL of your deployed API Gateway  
+   - VITE_GOOGLE_CLIENT_ID | Google OAuth Client ID
+   - GOOGLE_CLIENT_ID      | Google OAuth Client ID            
+   - GOOGLE_CLIENT_SECRET  | Google OAuth Client Secret      
 
 ## License
 
