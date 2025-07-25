@@ -37,9 +37,10 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
   would need to be verified by Google to be published. Since this project is intended for personal and portfolio use only,
   I have not completed this verification process. If you are an employer or reviewer and
   would like to try the app, I can add your Google account to the test users list upon request.
-- When signing in, users may see a warning about the app being unverified, they may
-  safely proceed.
 - Google does not allow more than 100 test users.
+- When signing in, users may see a warning about the app being unverified, they may
+  safely proceed. There may also be a warning that the app is requesting full access to your Youtube account, however the app 
+  is actually only requesting 'youtube.readonly' access, which allows it to view data, and it cannot edit or delete anything.
 
 ## Getting Started
 
