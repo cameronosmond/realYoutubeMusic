@@ -5,6 +5,19 @@ the songs by that artist and which playlists they are in.
 
 Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfront.net)
 
+## Table of Contents
+
+- [Live Demo](#live-demo)
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Running Locally](#running-locally)
+- [Deployment](#deployment)
+- [Folder Structure](#folder-structure)
+- [Environment Variables](#environment-variables)
+- [License](#license)
+
+
 ## Tech Stack
 
 - React + Vite (frontend)
