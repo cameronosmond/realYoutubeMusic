@@ -33,12 +33,13 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 
 ## Note on Google OAuth Verification
 
-- This app uses Google OAuth2 for authentification. Since it will have fewer than 100 users,
-  it is not verified by Google
+- This app uses Google OAuth2 for authentification. Because it requests sensitive information, this app
+  would need to be verified by Google to be published. Since this project is intended for personal and portfolio use only,
+  I have not completed this verification process. If you are an employer or reviewer and
+  would like to try the app, I can add your Google account to the test users list upon request.
 - When signing in, users may see a warning about the app being unverified, they may
-  safely proceed
-- If the project were to scale beyond 100 users, completing Google's verification process
-  would be required
+  safely proceed.
+- Google does not allow more than 100 test users.
 
 ## Getting Started
 
@@ -129,8 +130,8 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 2. Google Cloud
    - Add url obtained from Cloudfront to the client id under Authorized Javascript Origins
    - Add url/auth/callback to the client id under Authorized redirect URIs
-   - Follow directions at https://support.google.com/cloud/answer/13461325?sjid=8080830732266021786-NA for submitting app for 
-      verification if scaling to more than 100 users
+   - Follow directions at https://support.google.com/cloud/answer/13461325?sjid=8080830732266021786-NA for submitting app for
+     verification if scaling to more than 100 users
 
 ## Folder Structure
 
