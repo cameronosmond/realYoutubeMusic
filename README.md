@@ -60,7 +60,7 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
    - `zip -r googleSignIn.zip googleSignIn.mjs node_modules package.json`
    - Go to AWS console and make two separate lambda functions:
      googleSignIn and getSongsByArtist
-   - Upload the zip files, getSongsByArtist.zip and googleSignIn.zip to their respective lambda functions
+   - Upload the zip files, getSongsByArtist.zip and googleSignIn.zip, to their respective lambda functions
    - Ensure handler in AWS matches the file name for that function,
      i.e. getSongsByArtist.handler, googleSignIn.handler
    - Under Configuration->General configuration:
@@ -89,7 +89,7 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 
    - `cd frontend && touch .env`
    - Add variables:
-     VITE_API_URL: API Gateway Invoke URL
+     VITE_API_URL: API Gateway Invoke URL,
      VITE_GOOGLE_CLIENT_ID: Google OAuth Client ID
 
 8. Final Notes
