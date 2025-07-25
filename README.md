@@ -1,7 +1,7 @@
 # Youtube Music Playlist Manager
 
-Allows users to view their songs in their Youtube Music playlists by artist, displaying
-the songs and which playlists they are in.
+Allows users to view their songs in their Youtube Music playlists searching by artist, displaying
+the songs by that artist and which playlists they are in.
 
 Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfront.net)
 
