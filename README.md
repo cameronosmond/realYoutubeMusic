@@ -7,7 +7,6 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 
 ## Table of Contents
 
-- [Live Demo](#live-demo)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Getting Started](#getting-started)
