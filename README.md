@@ -3,7 +3,17 @@
 Allows users to view their songs in their Youtube Music playlists searching by artist, displaying
 the songs by that artist and which playlists they are in.
 
-Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfront.net)
+## Demo Video 
+
+[![Watch the demo](https://youtu.be/1730uF6zBWE)](https://youtu.be/1730uF6zBWE)
+
+## Contact & Access
+
+This app is currently limited to test users due to Google OAuth verification requirements.  
+If you're an employer or reviewer and would like access, feel free to contact me:
+
+   - Email: cameronosmond05@gmail.com
+   - Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfront.net)
 
 ## Table of Contents
 
