@@ -9,13 +9,13 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 
 - [Tech Stack](#tech-stack)
 - [Features](#features)
+- [Note on Google OAuth Verification](#note-on-google-oauth-verification)
 - [Getting Started](#getting-started)
 - [Running Locally](#running-locally)
 - [Deployment](#deployment)
 - [Folder Structure](#folder-structure)
 - [Environment Variables](#environment-variables)
 - [License](#license)
-
 
 ## Tech Stack
 
@@ -30,6 +30,15 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 - Store user id and refresh token securely in DynamoDB
 - Static React frontend hosted on S3
 - Serverless backend with Lambda functions
+
+## Note on Google OAuth Verification
+
+- This app uses Google OAuth2 for authentification. Since it will have fewer than 100 users,
+  it is not verified by Google
+- When signing in, users may see a warning about the app being unverified, they may
+  safely proceed
+- If the project were to scale beyond 100 users, completing Google's verification process
+  would be required
 
 ## Getting Started
 
@@ -126,7 +135,6 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 
 - `/frontend` — React + Vite code
 - `/lambdas` — Lambda functions
-- `/infra` — deployment scripts and configs
 
 ## Environment Variables
 
