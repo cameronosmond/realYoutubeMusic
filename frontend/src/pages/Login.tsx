@@ -58,7 +58,7 @@ function Login() {
         />
       ) : (
         <>
-          <h1>Welcome to Youtube Music Playlist Manager</h1>
+          <h1>Welcome to Youtube Music Search</h1>
           <button id="loginButton" type="button" onClick={() => client.requestCode()}>
             Login with Google
           </button>

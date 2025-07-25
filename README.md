@@ -1,4 +1,4 @@
-# Youtube Music Playlist Manager
+# Youtube Music Search
 
 Allows users to view their songs in their Youtube Music playlists searching by artist, displaying
 the songs by that artist and which playlists they are in.
