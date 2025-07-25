@@ -129,7 +129,8 @@ Live App: [https://d1xnp62o6g2k4x.cloudfront.net](https://d1xnp62o6g2k4x.cloudfr
 2. Google Cloud
    - Add url obtained from Cloudfront to the client id under Authorized Javascript Origins
    - Add url/auth/callback to the client id under Authorized redirect URIs
-   - Follow directions https://support.google.com/cloud/answer/13461325?sjid=8080830732266021786-NA for submitting app for verification
+   - Follow directions at https://support.google.com/cloud/answer/13461325?sjid=8080830732266021786-NA for submitting app for 
+      verification if scaling to more than 100 users
 
 ## Folder Structure
 
