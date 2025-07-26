@@ -65,7 +65,12 @@ export const handler = async (event) => {
         const playlistRes = await fetch("https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true&maxResults=25", {
             headers: { Authorization: `Bearer ${access_token}` },
         });
-        const playlists = (await playlistRes.json()).items;
+        const playlistJson = await playlistRes.json();
+
+        if (!playlistRes.ok) {
+            throw new Error("Failed to fetch playlists: ", playlistJson.error?.message);
+        }
+        const playlists = playlistJson.items ?? [];
 
         // map through playlists array, replacing each array with array of valid songs from that playlist
         const allResults = await Promise.all(
