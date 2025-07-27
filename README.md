@@ -48,9 +48,10 @@ If you're an employer or reviewer and would like access, feel free to contact me
   I have not completed this verification process. If you are an employer or reviewer and
   would like to try the app, I can add your Google account to the test users list upon request.
 - Google does not allow more than 100 test users.
-- When signing in, users may see a warning about the app being unverified, they may
+- When signing in, users may see a warning about the app not being verified, they may
   safely proceed. There may also be a warning that the app is requesting full access to your Youtube account, however the app 
   is actually only requesting 'youtube.readonly' access, which allows it to view data, and it cannot edit or delete anything.
+  To be able to use this app, ensure you give it access to your account when it asks to do so.
 
 ## Getting Started
 
