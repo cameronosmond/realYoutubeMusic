@@ -10,6 +10,7 @@ interface Song {
 
 function Dashboard() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const { encoded } = useParams<{ encoded: string }>();
@@ -43,6 +44,7 @@ function Dashboard() {
       }
     } catch (error) {
       setLoading(false);
+      setError(true);
       console.trace(error);
     }
   };
@@ -67,6 +69,7 @@ function Dashboard() {
             id="form"
             action={(formData: FormData) => {
               setLoading(true);
+              setError(false);
               getSongs(formData);
             }}>
             <input
@@ -78,6 +81,7 @@ function Dashboard() {
               Search
             </button>
           </form>
+          {error && <h2 color="red">Error, try logging in again</h2>}
         </>
       )}
     </FadeContent>
