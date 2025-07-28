@@ -52,7 +52,7 @@ function Songs() {
   return (
     <>
       <Link to={`/dashboard/${encoded}`}>
-        <h2 id="dashboardText">⬅️ Back to Dashboard</h2>
+        <h2 className="backText">⬅️ Back to Dashboard</h2>
       </Link>
       <FadeContent
         blur={true}

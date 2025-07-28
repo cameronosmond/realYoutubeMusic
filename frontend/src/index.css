@@ -35,7 +35,7 @@ h1 {
   line-height: 1.1;
 }
 
-#dashboardText {
+.backText {
   position: fixed;
   left: 1em;
   top: 1em;
