@@ -9,6 +9,7 @@ export const handler = async (event) => {
     try {
         const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
         const clientId = process.env.GOOGLE_CLIENT_ID;
+        const TABLE_NAME = process.env.TABLE_NAME;
 
         if (!event.body) {
             return {
@@ -40,7 +41,7 @@ export const handler = async (event) => {
         // get refresh token associated with userId from db
         const getResult = await ddb.send(
             new GetCommand({
-                TableName: "ytMusicAppUsers",
+                TableName: TABLE_NAME,
                 Key: { user_id: userId },
             })
         );
