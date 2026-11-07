@@ -22,27 +22,27 @@ function Songs() {
   useEffect(() => {
     setLoading(true);
     let numberSongs: number = 0;
-    const songsSeen: Map<string, string> = new Map();
-    // create map with key value pairings of (song title, playlists song is in)
+
+    // (song title, song object)
+    const songsSeen: Map<string, Song> = new Map();
+
     for (const song of songs) {
       if (!songsSeen.has(song.title)) {
-        songsSeen.set(song.title, song.playlistTitle);
+        songsSeen.set(song.title, { ...song });
       } else {
-        const playlists = songsSeen.get(song.title);
-        songsSeen.set(song.title, `${playlists}, ${song.playlistTitle}`);
+        const existingSong = songsSeen.get(song.title)!;
+        songsSeen.set(song.title, {
+          ...existingSong,
+          playlistTitle: `${existingSong.playlistTitle}, ${song.playlistTitle}`,
+        });
       }
       numberSongs += 1;
     }
     setTotalSongs(numberSongs);
 
-    let unique: number = 0;
-    const songsFiltered: Song[] = [];
-    // iterate through map and add Song objects to songsFiltered
-    for (const [key, value] of songsSeen) {
-      songsFiltered.push({ title: key, playlistTitle: value });
-      unique += 1;
-    }
-    setUniqueSongs(unique);
+    // convert map to array
+    const songsFiltered: Song[] = Array.from(songsSeen.values());
+    setUniqueSongs(songsFiltered.length);
 
     // sort songs in alphabetical order by their titles
     songsFiltered.sort((a, b) => a.title.localeCompare(b.title));
@@ -81,8 +81,24 @@ function Songs() {
             <ul>
               {songsArray.map((song) => (
                 <li key={song.title}>
-                  <strong>{song.title}</strong> - Playlist(s):{" "}
-                  <strong>{song.playlistTitle}</strong>
+                  <strong>
+                    {song.youtubeId ? (
+                      <a
+                        href={`https://www.youtube.com/watch?v=${song.youtubeId}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          color: "inherit",
+                          textDecoration: "underline",
+                        }}>
+                        {song.title}
+                      </a>
+                    ) : (
+                      song.title
+                    )}
+                  </strong>
+                  <br />
+                  Playlist(s): <strong>{song.playlistTitle}</strong>
                 </li>
               ))}
             </ul>
