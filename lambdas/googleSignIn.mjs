@@ -115,7 +115,11 @@ export const handler = async (event) => {
       
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,X-Requested-With"
+      },
       body: JSON.stringify({ encoded }),
     };
 
@@ -123,6 +127,11 @@ export const handler = async (event) => {
     console.error("Full error:", error);
     return {
       statusCode: 500,
+      headers: { 
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,X-Requested-With"
+      },
       body: JSON.stringify({ error: error.message || "Internal server error" }),
     };
   }
