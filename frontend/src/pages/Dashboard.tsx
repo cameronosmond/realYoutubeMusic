@@ -6,7 +6,11 @@ import { FourSquare } from "react-loading-indicators";
 interface Song {
   title: string;
   playlistTitle: string;
+  youtubeId?: string;
+  thumbnailUrl?: string;
 }
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Dashboard() {
   const [loading, setLoading] = useState(false);
@@ -15,37 +19,59 @@ function Dashboard() {
   const navigate = useNavigate();
   const { encoded } = useParams<{ encoded: string }>();
 
+  const pollSearch = async (
+    artistNameLower: string,
+    attempt = 1,
+  ): Promise<Song[]> => {
+    const maxRetries = 15;
+    const baseDelay = 1500;
+
+    const res = await fetch(`${apiUrl}/search`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      body: JSON.stringify({
+        artistName: artistNameLower,
+        encoded,
+      }),
+    });
+
+    if (res.status === 202) {
+      if (attempt > maxRetries) {
+        throw new Error("Sync timeout: Background process took too long.");
+      }
+      const delay = Math.min(baseDelay * Math.pow(1.5, attempt - 1), 5000);
+      console.log(
+        `Library is syncing. Polling again in ${delay}ms... (Attempt ${attempt})`,
+      );
+
+      await sleep(delay);
+      return pollSearch(artistNameLower, attempt + 1);
+    }
+
+    const data = await res.json();
+
+    if (res.ok) {
+      return data;
+    } else {
+      throw new Error(data.error || "Search failed");
+    }
+  };
+
   const getSongs = async (formData: FormData) => {
     const artistName = formData.get("artistName") as string;
     const artistNameLower = artistName.toLowerCase();
 
     try {
-      // calling getSongsByArtist lambda function via api gateway endpoint
-      const res = await fetch(`${apiUrl}/getSongsByArtist`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        body: JSON.stringify({
-          artistName: artistNameLower,
-          encoded,
-        }),
-      });
-
-      const data = await res.json();
+      const songs = await pollSearch(artistNameLower);
       setLoading(false);
-
-      if (res.ok) {
-        const songs: Song[] = data.result;
-        navigate(`/songs/${encoded}/${artistName}`, { state: { songs } });
-      } else {
-        console.error("Error:", data.error || data);
-      }
+      navigate(`/songs/${encoded}/${artistName}`, { state: { songs } });
     } catch (error) {
+      console.error(error);
       setLoading(false);
       setError(true);
-      console.trace(error);
     }
   };
 

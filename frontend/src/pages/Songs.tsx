@@ -6,6 +6,8 @@ import { FourSquare } from "react-loading-indicators";
 interface Song {
   title: string;
   playlistTitle: string;
+  youtubeId?: string;
+  thumbnailUrl?: string;
 }
 
 function Songs() {

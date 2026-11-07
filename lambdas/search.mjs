@@ -47,7 +47,7 @@ export const handler = async (event) => {
 
         const searchTerm = artistName.toLowerCase();
 
-        // check the Sync Status in DynamoDB
+        // check the Sync Status in DDB
         const metaResponse = await docClient.send(new GetCommand({
             TableName: TABLE_NAME,
             Key: {
