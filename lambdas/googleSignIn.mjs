@@ -88,7 +88,7 @@ export const handler = async (event) => {
       new PutCommand({
         TableName: TABLE_NAME,
         Item: {
-          userId: userId,
+          user_id: userId,
           sk: "meta",
           refresh_token: refreshToken,
           syncStatus: currentStatus,

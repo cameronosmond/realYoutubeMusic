@@ -74,7 +74,7 @@ export const handler = async (event) => {
         do {
             const queryResponse = await docClient.send(new QueryCommand({
                 TableName: TABLE_NAME,
-                KeyConditionExpression: "userId = :uid AND begins_with(sk, :prefix)",
+                KeyConditionExpression: "user_id = :uid AND begins_with(sk, :prefix)",
                 ExpressionAttributeValues: {
                     ":uid": userId,
                     ":prefix": "track#"
